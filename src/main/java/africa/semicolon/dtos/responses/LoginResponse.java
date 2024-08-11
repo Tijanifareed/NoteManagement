@@ -6,6 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DeleteNoteResponse {
+public class LoginResponse {
+    private String email;
     private String message;
+    private boolean isLoggedIn;
 }

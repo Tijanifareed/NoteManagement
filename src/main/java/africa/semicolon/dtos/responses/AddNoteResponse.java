@@ -1,5 +1,6 @@
 package africa.semicolon.dtos.responses;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,9 +8,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class UpdateNoteResponse {
+public class AddNoteResponse {
     private String noteId;
-    private String updatedTitle;
-    private String updatedContent;
-    private LocalDateTime dateUpdated;
+    private String noteTitle;
+    private String noteContent;
+    private LocalDateTime dateCreated;
 }
