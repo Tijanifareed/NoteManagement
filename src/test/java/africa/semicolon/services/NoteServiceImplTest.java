@@ -3,6 +3,7 @@ package africa.semicolon.services;
 import africa.semicolon.data.models.Note;
 import africa.semicolon.data.repositories.NoteRepository;
 import africa.semicolon.dtos.requests.AddNoteRequest;
+import africa.semicolon.dtos.requests.DeleteNoteRequest;
 import africa.semicolon.dtos.requests.UpdateNoteRequest;
 import africa.semicolon.dtos.responses.AddNoteResponse;
 import africa.semicolon.dtos.responses.DeleteNoteResponse;
@@ -70,7 +71,9 @@ public class NoteServiceImplTest {
     public void deleteNoteTest(){
         AddNoteResponse response = createNewNote();
         String noteId = response.getNoteId();
-        DeleteNoteResponse response1 = noteService.deleteNote(noteId);
+        DeleteNoteRequest request = new DeleteNoteRequest();
+        request.setNoteId(noteId);
+        DeleteNoteResponse response1 = noteService.deleteNote(request);
         assertThat(response1.getMessage()).contains("deleted");
     }
 

@@ -3,6 +3,7 @@ package africa.semicolon.services;
 import africa.semicolon.data.models.Note;
 import africa.semicolon.data.repositories.NoteRepository;
 import africa.semicolon.dtos.requests.AddNoteRequest;
+import africa.semicolon.dtos.requests.DeleteNoteRequest;
 import africa.semicolon.dtos.requests.UpdateNoteRequest;
 import africa.semicolon.dtos.responses.AddNoteResponse;
 import africa.semicolon.dtos.responses.DeleteNoteResponse;
@@ -52,9 +53,11 @@ public class NoteServiceImpl implements NoteService{
         return mapNoteUpdateResponse(note);
     }
 
+
+
     @Override
-    public DeleteNoteResponse deleteNote(String noteId) {
-        Note note = findById(noteId);
+    public DeleteNoteResponse deleteNote(DeleteNoteRequest request1) {
+        Note note = findById(request1.getNoteId());
         noteRepository.delete(note);
         DeleteNoteResponse response = new DeleteNoteResponse();
         response.setMessage("note deleted successfully");

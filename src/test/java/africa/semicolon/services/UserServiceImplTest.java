@@ -3,14 +3,8 @@ package africa.semicolon.services;
 import africa.semicolon.data.models.User;
 import africa.semicolon.data.repositories.NoteRepository;
 import africa.semicolon.data.repositories.UserRepository;
-import africa.semicolon.dtos.requests.AddNoteRequest;
-import africa.semicolon.dtos.requests.LoginRequest;
-import africa.semicolon.dtos.requests.LogoutRequest;
-import africa.semicolon.dtos.requests.RegisterUserRequest;
-import africa.semicolon.dtos.responses.AddNoteResponse;
-import africa.semicolon.dtos.responses.LoginResponse;
-import africa.semicolon.dtos.responses.LogoutResponse;
-import africa.semicolon.dtos.responses.RegisterUserResponse;
+import africa.semicolon.dtos.requests.*;
+import africa.semicolon.dtos.responses.*;
 import africa.semicolon.exceptions.EmailExistsException;
 import africa.semicolon.exceptions.IncorrectPasswordException;
 import org.junit.jupiter.api.BeforeEach;
@@ -98,6 +92,38 @@ public class UserServiceImplTest {
         assertThat(response1.getNoteId()).isNotNull();
         User user = users.findByEmail(response.getEmail()).orElseThrow();
         assertThat(user.getNoteList().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void editContact(){
+        createNewUser();
+        LoginResponse response = userLogin();
+        AddNoteRequest request = new AddNoteRequest();
+        request.setTitle("I am a boy");
+        request.setContent("new content");
+        request.setAuthorEmail("email@email.com");
+        AddNoteResponse response1 = userService.createNote(request);
+        UpdateNoteRequest request1 = new UpdateNoteRequest();
+        request1.setNewContent("cont");
+        request1.setNewTitle("title");
+        request1.setId(response1.getNoteId());
+        UpdateNoteResponse responses = userService.updateNoteWith(request1);
+        assertThat(responses.getUpdatedTitle()).contains("title");
+
+    }
+
+    @Test
+    public void testTHatUserCanDeleteContact() {
+        createNewUser();
+        LoginResponse response = userLogin();
+        AddNoteRequest request = new AddNoteRequest();
+        request.setTitle("I am a boy");
+        request.setContent("new content");
+        request.setAuthorEmail("email@email.com");
+        AddNoteResponse response1 = userService.createNote(request);
+        DeleteNoteRequest request1 = new DeleteNoteRequest();
+        request1.setNoteId(response1.getNoteId());
+        DeleteNoteResponse response2 = userService.deleteNote(request1);
     }
 
     @Test

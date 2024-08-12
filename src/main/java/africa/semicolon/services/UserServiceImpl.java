@@ -3,14 +3,8 @@ package africa.semicolon.services;
 import africa.semicolon.data.models.Note;
 import africa.semicolon.data.models.User;
 import africa.semicolon.data.repositories.UserRepository;
-import africa.semicolon.dtos.requests.AddNoteRequest;
-import africa.semicolon.dtos.requests.LoginRequest;
-import africa.semicolon.dtos.requests.LogoutRequest;
-import africa.semicolon.dtos.requests.RegisterUserRequest;
-import africa.semicolon.dtos.responses.AddNoteResponse;
-import africa.semicolon.dtos.responses.LoginResponse;
-import africa.semicolon.dtos.responses.LogoutResponse;
-import africa.semicolon.dtos.responses.RegisterUserResponse;
+import africa.semicolon.dtos.requests.*;
+import africa.semicolon.dtos.responses.*;
 import africa.semicolon.exceptions.EmailExistsException;
 import africa.semicolon.exceptions.IncorrectPasswordException;
 import africa.semicolon.exceptions.UserLoginException;
@@ -87,6 +81,18 @@ public class UserServiceImpl implements UserService {
         response.setMessage("user logged out successfully");
         response.setLoggedIn(user.isLoggedIn());
         return response;
+    }
+
+
+
+    @Override
+    public UpdateNoteResponse updateNoteWith(UpdateNoteRequest request) {
+        return noteService.updateNoteWith(request);
+    }
+
+    @Override
+    public DeleteNoteResponse deleteNote(DeleteNoteRequest request1) {
+        return noteService.deleteNote(request1);
     }
 
     private void validateUserLogin(User user) {
