@@ -38,9 +38,9 @@ public class UserServiceImplTest {
 
     private RegisterUserResponse createNewUser() {
         RegisterUserRequest request = new RegisterUserRequest();
-        request.setFirstName("first name");
-        request.setLastName("last name");
-        request.setEmail("email@email.com");
+        request.setFirstName("new first name");
+        request.setLastName("new name");
+        request.setEmail("newemail@email.com");
         request.setPassword("password");
         return userService.registerUserWith(request);
     }
