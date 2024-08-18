@@ -1,6 +1,7 @@
 package africa.semicolon.controllers;
 
 
+import africa.semicolon.data.models.Note;
 import africa.semicolon.dtos.requests.*;
 import africa.semicolon.dtos.responses.*;
 import africa.semicolon.exceptions.MyNotesException;
@@ -8,6 +9,8 @@ import africa.semicolon.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -83,6 +86,12 @@ public class UserController {
         catch (MyNotesException exception){
             return new ResponseEntity<>(new ApiResponse(false,exception.getMessage()), BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/find-note-byTitle")
+    public ResponseEntity<?> findContactByName(@RequestBody SearchNoteRequest request) {
+        Note note = userService.findNoteByTitle(request.getTitle());
+        return ResponseEntity.ok(note);
     }
 
 

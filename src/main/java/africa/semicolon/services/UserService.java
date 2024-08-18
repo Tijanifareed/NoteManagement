@@ -1,5 +1,6 @@
 package africa.semicolon.services;
 
+import africa.semicolon.data.models.Note;
 import africa.semicolon.data.models.User;
 import africa.semicolon.dtos.requests.*;
 import africa.semicolon.dtos.responses.*;
@@ -20,4 +21,6 @@ public interface UserService {
     UpdateNoteResponse updateNoteWith(UpdateNoteRequest request);
 
     DeleteNoteResponse deleteNote(DeleteNoteRequest request1);
+
+    Note findNoteByTitle(String title);
 }

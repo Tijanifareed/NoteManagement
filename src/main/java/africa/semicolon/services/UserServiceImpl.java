@@ -95,6 +95,11 @@ public class UserServiceImpl implements UserService {
         return noteService.deleteNote(request1);
     }
 
+    @Override
+    public Note findNoteByTitle(String title) {
+     return noteService.findNotesByTitle(title);
+    }
+
     private void validateUserLogin(User user) {
         if(!user.isLoggedIn())throw new UserLoginException("you need to log in");
     }
